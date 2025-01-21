@@ -62,7 +62,7 @@ function onRestoreDatabase(){
     _fileName=${2}
     _adminPassword=${3}
 
-    _hostname=$(getHostname ${flags} ${_databaseSpec})
+    _hostname="postgres"
     _database=$(getDatabaseName ${_databaseSpec})
     _port=$(getPort ${flags} ${_databaseSpec})
     _portArg=${_port:+"-p ${_port}"}

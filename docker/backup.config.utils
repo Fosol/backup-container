@@ -200,7 +200,7 @@ function getUsername(){
     # _paramName=$(getHostUserParam ${_hostname})
     # # Backward compatibility ...
     # _username="${!_paramName:-${DATABASE_USER}}"
-    _username="${!_paramName:-${DATABASE_USER}}"
+    _username="${DATABASE_USER}"
     echo ${_username}
   )
 }

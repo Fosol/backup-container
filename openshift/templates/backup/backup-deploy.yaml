@@ -247,7 +247,7 @@ parameters:
     # Set value to "docker-registry.default.svc:5000" if using OCP3
     value: "docker.io"
   - name: IMAGE_TAG
-    displayName: 
+    displayName:
     description: Image tag name, e.g. latest
     value: latest
   - name: TAG_NAME

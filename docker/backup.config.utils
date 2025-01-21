@@ -198,7 +198,7 @@ function getUsername(){
     _hostname=$(getHostname ${_databaseSpec})
     _paramName=$(getHostUserParam ${_hostname})
     # Backward compatibility ...
-    _username="${!_paramName:-${DATABASE_USER}}"
+    _username="${DATABASE_USER}"
     echo ${_username}
   )
 }
@@ -209,7 +209,7 @@ function getPassword(){
     _hostname=$(getHostname ${_databaseSpec})
     _paramName=$(getHostPasswordParam ${_hostname})
     # Backward compatibility ...
-    _password="${!_paramName:-${DATABASE_PASSWORD}}"
+    _password="${DATABASE_PASSWORD}"
     echo ${_password}
   )
 }

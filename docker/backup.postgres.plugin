@@ -19,7 +19,7 @@ function onBackupDatabase(){
     _databaseSpec=${1}
     _backupFile=${2}
 
-    _hostname=$(getHostname ${_databaseSpec})
+    _hostname='postgres'
     _database=$(getDatabaseName ${_databaseSpec})
     _port=$(getPort ${_databaseSpec})
     _portArg=${_port:+"-p ${_port}"}
@@ -218,7 +218,7 @@ function onVerifyBackup(){
 
     _databaseSpec=${1}
 
-    _hostname=$(getHostname -l ${_databaseSpec})
+    _hostname='postgres'
     _database=$(getDatabaseName ${_databaseSpec})
     _schema=$(getSchema ${_databaseSpec} 'verify')
     _port=$(getPort -l ${_databaseSpec})
@@ -266,7 +266,7 @@ function onGetDbSize(){
 
     _databaseSpec=${1}
 
-    _hostname=$(getHostname ${flags} ${_databaseSpec})
+    _hostname='postgres'
     _database=$(getDatabaseName ${_databaseSpec})
     _port=$(getPort ${flags} ${_databaseSpec})
     _portArg=${_port:+"-p ${_port}"}

@@ -20,11 +20,11 @@ function onBackupDatabase(){
     _backupFile=${2}
 
     _hostname='postgres'
-    _database=$(getDatabaseName ${_databaseSpec})
+    _database='tno'
     _port=$(getPort ${_databaseSpec})
     _portArg=${_port:+"-p ${_port}"}
-    _username=$(getUsername ${_databaseSpec})
-    _password=$(getPassword ${_databaseSpec})
+    _username=$DATABASE_USER
+    _password=$DATABASE_PASSWORD
 
     echoGreen "Backing up '${_hostname}${_port:+:${_port}}${_database:+/${_database}}' to '${_backupFile}' ..."
 
@@ -63,11 +63,11 @@ function onRestoreDatabase(){
     _adminPassword=${3}
 
     _hostname="postgres"
-    _database=$(getDatabaseName ${_databaseSpec})
+    _database='tno'
     _port=$(getPort ${flags} ${_databaseSpec})
     _portArg=${_port:+"-p ${_port}"}
-    _username=$(getUsername ${_databaseSpec})
-    _password=$(getPassword ${_databaseSpec})
+    _username=$DATABASE_USER
+    _password=$DATABASE_PASSWORD
     echo -e "Restoring '${_fileName}' to '${_hostname}${_port:+:${_port}}${_database:+/${_database}}' ...\n" >&2
 
     export PGPASSWORD=${_adminPassword}
@@ -191,11 +191,11 @@ function onPingDbServer(){
     _databaseSpec=${1}
 
     _hostname='postgres'
-    _database=$(getDatabaseName ${_databaseSpec})
+    _database='tno'
     _port=$(getPort ${flags} ${_databaseSpec})
     _portArg=${_port:+"-p ${_port}"}
-    _username=$(getUsername ${_databaseSpec})
-    _password=$(getPassword ${_databaseSpec})
+    _username=$DATABASE_USER
+    _password=$DATABASE_PASSWORD
 
     if PGPASSWORD=${_password} psql -h ${_hostname} ${_portArg} -U ${_username} -q -d ${_database} -c 'SELECT 1' >/dev/null 2>&1; then
       return 0
@@ -219,12 +219,12 @@ function onVerifyBackup(){
     _databaseSpec=${1}
 
     _hostname='postgres'
-    _database=$(getDatabaseName ${_databaseSpec})
+    _database='tno'
     _schema=$(getSchema ${_databaseSpec} 'verify')
     _port=$(getPort -l ${_databaseSpec})
     _portArg=${_port:+"-p ${_port}"}
-    _username=$(getUsername ${_databaseSpec})
-    _password=$(getPassword ${_databaseSpec})
+    _username=$DATABASE_USER
+    _password=$DATABASE_PASSWORD
 
     debugMsg "backup.postgres.plugin - onVerifyBackup"
     tables=$(psql -h "${_hostname}" ${_portArg} -d "${_database}" -t -c "SELECT table_name FROM information_schema.tables WHERE table_schema='${_schema}' AND table_type='BASE TABLE';")
@@ -267,11 +267,11 @@ function onGetDbSize(){
     _databaseSpec=${1}
 
     _hostname='postgres'
-    _database=$(getDatabaseName ${_databaseSpec})
+    _database='tno'
     _port=$(getPort ${flags} ${_databaseSpec})
     _portArg=${_port:+"-p ${_port}"}
-    _username=$(getUsername ${_databaseSpec})
-    _password=$(getPassword ${_databaseSpec})
+    _username=$DATABASE_USER
+    _password=$DATABASE_PASSWORD
 
     size=$(PGPASSWORD=${_password} psql -h "${_hostname}" ${_portArg} -U "${_username}" -d "${_database}" -t -c "SELECT pg_size_pretty(pg_database_size(current_database())) as size;")
     rtnCd=${?}

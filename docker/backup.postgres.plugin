@@ -190,7 +190,7 @@ function onPingDbServer(){
 
     _databaseSpec=${1}
 
-    _hostname=$(getHostname ${flags} ${_databaseSpec})
+    _hostname='postgres'
     _database=$(getDatabaseName ${_databaseSpec})
     _port=$(getPort ${flags} ${_databaseSpec})
     _portArg=${_port:+"-p ${_port}"}
